@@ -28,7 +28,7 @@ const getMovies = async () => {
     const response = await fetch(urlToFetch);
     if(response.ok) {
       const jsonResponse = await response.json();
-      
+      return jsonResponse.results;
     }
   } catch (error) {
     console.log(error);
@@ -60,9 +60,8 @@ const showRandomMovie = async () => {
     clearCurrentMovie();
   }
   const movies = await getMovies();
-  console.log(movies)
   const randomMovie = getRandomMovie(movies);
-  const info = getMovieInfo(randomMovie);
+  const info = await getMovieInfo(randomMovie);
   displayMovie(info);
 };
 
